@@ -16,6 +16,8 @@ public interface AdMapper {
 
     int insertSelective(Ad record);
 
+    int selectTest(@Param("id") Integer id);
+
     List<Ad> selectByExample(AdExample example);
 
     Ad selectByPrimaryKey(Integer id);
