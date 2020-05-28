@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("admin/auth")
 public class AuthController {
 
-    //@RequestMapping("admin/auth/login")
-    //public Object login(@RequestBody Map){
-    //
-    //}
     @RequestMapping("login")
     public BaseRespVo login(@RequestBody LoginBean loginBean){
         BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
