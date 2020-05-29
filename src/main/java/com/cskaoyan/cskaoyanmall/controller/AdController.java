@@ -1,27 +1,31 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
 import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
-import com.cskaoyan.cskaoyanmall.bean.DashboardRespVo;
-import com.cskaoyan.cskaoyanmall.service.DashboardService;
+import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
+import com.cskaoyan.cskaoyanmall.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @author viking chen
- * @date 2020/5/28 20:25
+ * @date 2020/5/29 22:13
  */
 @RestController
-public class DashboardController {
+@RequestMapping("admin/ad")
+public class AdController {
 
     @Autowired
-    DashboardService dashboardService;
+    AdService adService;
 
-    @RequestMapping("admin/dashboard")
-    public BaseRespVo dashboard() {
-        BaseRespVo<DashboardRespVo> resp = new BaseRespVo<>();
+    @RequestMapping("list")
+    public BaseRespVo adList(PagingReqVo pagingReqVo) {
+        BaseRespVo<Map<String,Object>> resp = new BaseRespVo<>();
         try {
-            resp.setData(dashboardService.getGoodsUserProductOrderTotal());
+            resp.setData(adService.getAdListData(pagingReqVo));
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
