@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("admin/auth")
 public class AuthController {
 
+
+    /**
+     * 暂定登录
+     * @param loginBean
+     * @return
+     */
+
     @RequestMapping("login")
     public BaseRespVo login(@RequestBody LoginBean loginBean){
         BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
@@ -19,9 +26,12 @@ public class AuthController {
         return objectBaseRespVo;
     }
 
+    /**
+     * 暂定管理员信息
+     * @return
+     */
     @RequestMapping("info")
     public String info(){
-
         return "{\"errno\":0,\"data\":{\"roles\":[\"超级管理员\"],\"name\":\"admin123\",\"perms\":[\"*\"],\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\"},\"errmsg\":\"成功\"}";
     }
 }
