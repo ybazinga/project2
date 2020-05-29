@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("admin/auth")
 public class AuthController {
 
-<<<<<<< HEAD
+
     /**
      * 暂定登录
      * @param loginBean
      * @return
      */
-=======
->>>>>>> 313fdfe74c1807e792d1e095a368a1914210862e
+
     @RequestMapping("login")
     public BaseRespVo login(@RequestBody LoginBean loginBean){
         BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
