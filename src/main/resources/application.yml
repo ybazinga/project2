@@ -16,3 +16,9 @@ map:
   domain: 'http://localhost:'
   port: ${server.port}
   staticPath: ${spring.mvc.static-path-pattern}
+#分页插件
+pagehelper:
+  helper-dialect: mysql
+logging:
+  level:
+    com.cskaoyan.cskaoyanmall.mapper: debug
