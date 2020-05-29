@@ -204,7 +204,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_ad
     <set>
       <if test="record.id != null">
