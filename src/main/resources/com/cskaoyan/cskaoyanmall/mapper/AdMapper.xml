@@ -204,9 +204,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="selectTest" resultType="java.lang.Integer">
-        abc
-    </select>
     <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_ad
     <set>
