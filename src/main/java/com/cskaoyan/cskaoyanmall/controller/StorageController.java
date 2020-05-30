@@ -18,7 +18,12 @@ public class StorageController {
     @Autowired
     StorageService storageService;
 
-
+    /**
+     * 图片上传
+     * spring.resources.static-locations 写死了，所以图会裂
+     * @param file 要和request请求体上的一致！！！
+     * @return
+     */
     @RequestMapping("create")
     public BaseRespVo create(MultipartFile file) {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
