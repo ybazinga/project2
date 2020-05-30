@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 @Component
-public class UserRespBaseData<T> {
+public class CommonRespBaseData<T> {
     /**
      * 查询结果条目数
      */
@@ -21,6 +21,4 @@ public class UserRespBaseData<T> {
      * 查询结果列表
      */
     List<T> items;
-
-
 }

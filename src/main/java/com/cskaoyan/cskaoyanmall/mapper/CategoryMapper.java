@@ -1,11 +1,9 @@
 package com.cskaoyan.cskaoyanmall.mapper;
 
-import com.cskaoyan.cskaoyanmall.bean.Category;
-import com.cskaoyan.cskaoyanmall.bean.CategoryExample;
+import com.cskaoyan.cskaoyanmall.bean.*;
+
 import java.util.List;
 
-import com.cskaoyan.cskaoyanmall.bean.CategoryL1RespVo;
-import com.cskaoyan.cskaoyanmall.bean.CategoryRespVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {
@@ -35,4 +33,8 @@ public interface CategoryMapper {
     List<CategoryRespVo> selectByLevelWithJoin(@Param("level") String level);
 
     List<CategoryL1RespVo> selectByLevel(@Param("level") String level);
+
+    List<CategoryList> selectCategoryList();
+
+    int selectPidByCategoryId(@Param("categoryId") int categoryId);
 }

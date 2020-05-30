@@ -2,6 +2,8 @@ package com.cskaoyan.cskaoyanmall.bean;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  *@Author: Lee et
  *@Date: Created in 10:16 2020/5/29
@@ -16,6 +18,9 @@ public class CategoryL1RespVo {
 
     private Integer value;
     private String label;
+
+
+
 
     public Integer getValue() {
         return value;

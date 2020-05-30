@@ -3,14 +3,12 @@ package com.cskaoyan.cskaoyanmall.controller;
 import com.cskaoyan.cskaoyanmall.bean.*;
 import com.cskaoyan.cskaoyanmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * 用户管理模块
@@ -38,11 +36,11 @@ public class UserController {
         String username = request.getParameter("username");
         String mobile = request.getParameter("mobile");
         BaseRespVo baseRespVo = new BaseRespVo();
-        UserRespBaseData<User> userRespBaseData;
-        userRespBaseData = userService.selectUsers(page, limit, username,mobile,sort, order);
+        CommonRespBaseData<User> commonRespBaseData;
+        commonRespBaseData = userService.selectUsers(page, limit, username,mobile,sort, order);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
-        baseRespVo.setData(userRespBaseData);
+        baseRespVo.setData(commonRespBaseData);
         return baseRespVo;
     }
 
@@ -56,10 +54,10 @@ public class UserController {
                                       HttpServletRequest request){
         String userId = request.getParameter("userId");
         String name = request.getParameter("name");
-        UserRespBaseData<Address> addressUserRespBaseData ;
+        CommonRespBaseData<Address> addressCommonRespBaseData;
         BaseRespVo baseRespVo = new BaseRespVo();
-        addressUserRespBaseData = userService.selectAddress(page,limit,userId,name,sort,order);
-        baseRespVo.setData(addressUserRespBaseData);
+        addressCommonRespBaseData = userService.selectAddress(page,limit,userId,name,sort,order);
+        baseRespVo.setData(addressCommonRespBaseData);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
@@ -73,10 +71,10 @@ public class UserController {
                                       HttpServletRequest request){
         String userId = request.getParameter("userId");
         String valueId = request.getParameter("valueId");
-        UserRespBaseData<Collect> collectUserRespBaseData;
+        CommonRespBaseData<Collect> collectCommonRespBaseData;
         BaseRespVo baseRespVo = new BaseRespVo();
-        collectUserRespBaseData = userService.selectCollects(page,limit,userId,valueId,sort,order);
-        baseRespVo.setData(collectUserRespBaseData);
+        collectCommonRespBaseData = userService.selectCollects(page,limit,userId,valueId,sort,order);
+        baseRespVo.setData(collectCommonRespBaseData);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
@@ -91,10 +89,10 @@ public class UserController {
                                     HttpServletRequest request){
         String userId = request.getParameter("userId");
         String goodsId = request.getParameter("goodsId");
-        UserRespBaseData<Footprint> footprintUserRespBaseData;
+        CommonRespBaseData<Footprint> footprintCommonRespBaseData;
         BaseRespVo baseRespVo = new BaseRespVo();
-        footprintUserRespBaseData = userService.selectFootPrints(page,limit,userId,goodsId,sort,order);
-        baseRespVo.setData(footprintUserRespBaseData);
+        footprintCommonRespBaseData = userService.selectFootPrints(page,limit,userId,goodsId,sort,order);
+        baseRespVo.setData(footprintCommonRespBaseData);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
@@ -109,10 +107,10 @@ public class UserController {
 
         String userId = request.getParameter("userId");
         String keyword = request.getParameter("keyword");
-        UserRespBaseData<SearchHistory> searchHistoryUserRespBaseData;
+        CommonRespBaseData<SearchHistory> searchHistoryCommonRespBaseData;
         BaseRespVo baseRespVo = new BaseRespVo();
-        searchHistoryUserRespBaseData = userService.selectHistories(page,limit,userId,keyword,sort,order);
-        baseRespVo.setData(searchHistoryUserRespBaseData);
+        searchHistoryCommonRespBaseData = userService.selectHistories(page,limit,userId,keyword,sort,order);
+        baseRespVo.setData(searchHistoryCommonRespBaseData);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
@@ -128,10 +126,10 @@ public class UserController {
 
         String id = request.getParameter("id");
         String username = request.getParameter("username");
-        UserRespBaseData<Feedback> feedbackUserRespBaseData;
+        CommonRespBaseData<Feedback> feedbackCommonRespBaseData;
         BaseRespVo baseRespVo = new BaseRespVo();
-        feedbackUserRespBaseData = userService.selectFeedBack(page,limit,id,username,sort,order);
-        baseRespVo.setData(feedbackUserRespBaseData);
+        feedbackCommonRespBaseData = userService.selectFeedBack(page,limit,id,username,sort,order);
+        baseRespVo.setData(feedbackCommonRespBaseData);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;

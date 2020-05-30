@@ -29,6 +29,9 @@ public class CategoryRespVo {
     private String level;
     private List<CategoryRespVo> children;
     private Integer pid;
+
+
+
     public Integer getId() {
         return id;
     }
