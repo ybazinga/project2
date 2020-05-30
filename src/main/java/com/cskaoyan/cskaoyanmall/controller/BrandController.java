@@ -90,7 +90,7 @@ public class BrandController {
     }
 
     /**
-     * （逻辑）删除某个品牌的信息
+     * 创建某个品牌的信息
      * @param brand
      * @return
      */

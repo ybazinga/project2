@@ -6,7 +6,6 @@ import com.cskaoyan.cskaoyanmall.service.AdService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -59,5 +58,21 @@ public class AdServiceImpl implements AdService {
         Integer id = adMapper.getLastInsertId();
         ad.setId(id);
         return ad;
+    }
+
+    @Override
+    public void getAdUpdateData(Ad ad) {
+        AdExample adExample = new AdExample();
+        adExample.createCriteria().andIdEqualTo(ad.getId());
+        adMapper.updateByExampleSelective(ad,adExample);
+    }
+
+    @Override
+    public void deleteAdById(Integer id) {
+        AdExample adExample = new AdExample();
+        adExample.createCriteria().andIdEqualTo(id);
+        Ad ad = new Ad();
+        ad.setDeleted(true);
+        adMapper.updateByExampleSelective(ad,adExample);
     }
 }
