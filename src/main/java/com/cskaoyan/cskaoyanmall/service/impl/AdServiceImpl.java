@@ -6,8 +6,10 @@ import com.cskaoyan.cskaoyanmall.service.AdService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,5 +48,16 @@ public class AdServiceImpl implements AdService {
         map.put("total",total);
         map.put("items",adList);
         return map;
+    }
+
+    @Override
+    public Ad getAdCreateData(Ad ad) {
+        ad.setAddTime(new Date());
+        ad.setUpdateTime(new Date());
+        ad.setDeleted(false);
+        adMapper.insertSelective(ad);
+        Integer id = adMapper.getLastInsertId();
+        ad.setId(id);
+        return ad;
     }
 }
