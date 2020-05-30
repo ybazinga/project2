@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,5 +45,31 @@ public class AdminServiceImpl implements AdminService {
         map.put("total",total);
         map.put("items",adminList);
         return map;
+    }
+
+    @Override
+    public Admin getAdCreateData(Admin admin) {
+        admin.setAddTime(new Date());
+        admin.setUpdateTime(new Date());
+        admin.setDeleted(false);
+        // 使用keyGenerator自动封装主键
+        adminMapper.insertSelective(admin);
+        return admin;
+    }
+
+    @Override
+    public Admin getAdminUpdateData(Admin admin) {
+        admin.setUpdateTime(new Date());
+        adminMapper.updateByPrimaryKeySelective(admin);
+        return admin;
+    }
+
+    @Override
+    public void deleteAdById(Integer id) {
+        AdminExample adminExample = new AdminExample();
+        adminExample.createCriteria().andIdEqualTo(id);
+        Admin admin = new Admin();
+        admin.setDeleted(true);
+        adminMapper.updateByExampleSelective(admin,adminExample);
     }
 }

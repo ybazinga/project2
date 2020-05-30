@@ -24,7 +24,7 @@ public class Admin {
 
     private Boolean deleted;
 
-    private String[] roleIds;
+    private Integer[] roleIds;
 
     public Integer getId() {
         return id;

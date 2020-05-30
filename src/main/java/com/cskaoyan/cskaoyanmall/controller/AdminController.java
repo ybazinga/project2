@@ -1,10 +1,9 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
-import com.cskaoyan.cskaoyanmall.bean.AdminPagingReqVo;
-import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
-import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
+import com.cskaoyan.cskaoyanmall.bean.*;
 import com.cskaoyan.cskaoyanmall.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +25,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping("list")
-    public BaseRespVo adList(AdminPagingReqVo pagingReqVo) {
+    public BaseRespVo admindList(AdminPagingReqVo pagingReqVo) {
         BaseRespVo<Map<String,Object>> resp = new BaseRespVo<>();
         try {
             resp.setData(adminService.getAdminListData(pagingReqVo));
@@ -40,4 +39,71 @@ public class AdminController {
         resp.setErrmsg("成功");
         return resp;
     }
+
+    /**
+     * 创建一个新的管理员
+     * @param admin
+     * @return
+     */
+    @RequestMapping("create")
+    public BaseRespVo adminCreate(@RequestBody Admin admin) {
+        BaseRespVo<Admin> resp = new BaseRespVo<>();
+        try {
+            resp.setData(adminService.getAdCreateData(admin));
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+    /**
+     * 更新一个管理员的信息
+     * @param admin
+     * @return
+     */
+    @RequestMapping("update")
+    public BaseRespVo adUpdate(@RequestBody Admin admin) {
+        BaseRespVo<Admin> resp = new BaseRespVo<>();
+        Admin respAdmin = null;
+        try {
+            respAdmin = adminService.getAdminUpdateData(admin);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setData(respAdmin);
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+    /**
+     * 逻辑删除某个管理员
+     * @param admin
+     * @return
+     */
+    @RequestMapping("delete")
+    public BaseRespVo adDelete(@RequestBody Admin admin) {
+        BaseRespVo resp = new BaseRespVo<>();
+        try {
+            adminService.deleteAdById(admin.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+
 }
