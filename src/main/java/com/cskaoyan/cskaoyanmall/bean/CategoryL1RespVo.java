@@ -20,6 +20,8 @@ public class CategoryL1RespVo {
     private String label;
 
 
+
+
     public Integer getValue() {
         return value;
     }

@@ -297,8 +297,39 @@
   </select>
 
 
+    <select id="selectCatrgoryId" resultType="java.lang.Integer">
+          select
+category_id FROM cskaoyanmall_goods WHERE goods_sn = #{id}
+    </select>
 
 
+  <resultMap id="GoodsMap" type="com.cskaoyan.cskaoyanmall.bean.Goods">
+    <result property="id" column="id"/>
+    <result property="goodsSn" column="goods_sn"/>
+    <result property="name" column="name"/>
+    <result property="categoryId" column="category_id"/>
+    <result property="brandId" column="brand_id"/>
+    <result property="gallery" column="gallery"/>
+    <result property="keywords" column="keywords"/>
+    <result property="brief" column="brief"/>
+    <result property="isOnSale" column="is_on_sale"/>
+    <result property="sortOrder" column="sort_order"/>
+    <result property="picUrl" column="pic_url"/>
+    <result property="shareUrl" column="share_url"/>
+    <result property="isNew" column="is_new"/>
+    <result property="isHot" column="is_hot"/>
+    <result property="unit" column="unit"/>
+    <result property="counterPrice" column="counter_price"/>
+    <result property="retailPrice" column="retail_price"/>
+    <result property="detail" column="detail"/>
+    <result property="addTime" column="add_time"/>
+    <result property="updateTime" column="update_time"/>
+    <result property="deleted" column="deleted"/>
+
+  </resultMap>
+  <select id="selectGoodsById" resultMap="GoodsMap">
+  select * from cskaoyanmall_goods where goods_sn = #{id}
+  </select>
 
 
   <update id="updateByExampleSelective" parameterType="map">

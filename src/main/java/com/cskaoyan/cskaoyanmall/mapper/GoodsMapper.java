@@ -36,6 +36,7 @@ public interface GoodsMapper {
     int updateByPrimaryKey(Goods record);
 
 
+    int selectCatrgoryId(@Param("id") Integer id);
 
-
+    Goods selectGoodsById(@Param("id") Integer id);
 }

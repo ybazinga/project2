@@ -3,6 +3,8 @@ package com.cskaoyan.cskaoyanmall.mapper;
 import com.cskaoyan.cskaoyanmall.bean.Brand;
 import com.cskaoyan.cskaoyanmall.bean.BrandExample;
 import java.util.List;
+
+import com.cskaoyan.cskaoyanmall.bean.CategoryL1RespVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface BrandMapper {
@@ -29,4 +31,6 @@ public interface BrandMapper {
     int updateByPrimaryKey(Brand record);
 
     int selectLastInsertId();
+
+    List<CategoryL1RespVo> selectBrandList();
 }

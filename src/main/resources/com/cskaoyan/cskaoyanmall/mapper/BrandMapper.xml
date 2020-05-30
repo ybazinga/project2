@@ -276,4 +276,10 @@
   <select id="selectLastInsertId" resultType="java.lang.Integer">
     select last_insert_id()
   </select>
+
+
+
+    <select id="selectBrandList" resultType="com.cskaoyan.cskaoyanmall.bean.CategoryL1RespVo">
+      select id as value ,name as label from cskaoyanmall_brand
+    </select>
 </mapper>
