@@ -76,7 +76,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, name, keywords, desc, pid, icon_url, pic_url, level, sort_order, add_time, update_time, 
+    id, name, keywords, desc, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
     deleted
   </sql>
     <select id="selectByExample" parameterType="com.cskaoyan.cskaoyanmall.bean.CategoryExample"
@@ -111,14 +111,14 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.cskaoyan.cskaoyanmall.bean.Category">
-    insert into cskaoyanmall_category (id, name, keywords, 
-      desc, pid, icon_url, 
-      pic_url, level, sort_order, 
+    insert into cskaoyanmall_category (id, name, keywords,
+      desc, pid, icon_url,
+      pic_url, level, sort_order,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
-      #{desc,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{iconUrl,jdbcType=VARCHAR}, 
-      #{picUrl,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR},
+      #{desc,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{iconUrl,jdbcType=VARCHAR},
+      #{picUrl,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -252,6 +252,34 @@
         select id as `value`, `name` as label from cskaoyanmall_category
         where `level` = #{level} and deleted = 0
     </select>
+
+
+
+
+    <resultMap id="CategoryMap" type="com.cskaoyan.cskaoyanmall.bean.CategoryList">
+        <result property="value" column="id"/>
+        <result property="label" column="name"/>
+        <collection property="children" ofType="com.cskaoyan.cskaoyanmall.bean.CategoryL1RespVo"
+                    column="id" select="com.cskaoyan.cskaoyanmall.mapper.CategoryMapper.selectChildren"/>
+    </resultMap>
+    <select id="selectChildren" resultMap="ChildrenMap" >
+select id ,name  from cskaoyanmall_category where pid = #{id}
+    </select>
+    <resultMap id="ChildrenMap" type="com.cskaoyan.cskaoyanmall.bean.CategoryL1RespVo">
+
+<result property="value" column="id"/>
+        <result column="name" property="label"/>
+    </resultMap>
+    <select id="selectCategoryList" resultMap="CategoryMap">
+        select id ,name  from cskaoyanmall_category where pid = 0
+    </select>
+
+
+    <select id="selectPidByCategoryId" resultType="java.lang.Integer">
+    select    pid from cskaoyanmall_category where id = #{categoryId}
+    </select>
+
+
     <update id="updateByExampleSelective" parameterType="map">
         update cskaoyanmall_category
         <set>
