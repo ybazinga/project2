@@ -1,10 +1,14 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
 import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
+import com.cskaoyan.cskaoyanmall.bean.CommentPagingReqVo;
 import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
+import com.cskaoyan.cskaoyanmall.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  *@Author: Lee et
@@ -13,14 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("admin/comment")
 public class CommentController {
-    /*@Autowired
-    CommentService commentService;*/
+    @Autowired
+    CommentService commentService;
 
     @RequestMapping("list")
-    public BaseRespVo commentList(PagingReqVo pagingReqVo) {
+    public BaseRespVo commentList(CommentPagingReqVo commentPagingReqVo) {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
+        Map map = null;
         try {
-
+            map = commentService.getCommentListData(commentPagingReqVo);
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
@@ -28,6 +33,7 @@ public class CommentController {
             return respVo;
         }
         respVo.setErrno(0);
+        respVo.setData(map);
         respVo.setErrmsg("成功");
         return respVo;
     }
