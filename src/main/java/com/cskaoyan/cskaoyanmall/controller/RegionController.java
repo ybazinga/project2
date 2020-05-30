@@ -1,27 +1,30 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
 import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
-import com.cskaoyan.cskaoyanmall.bean.DashboardRespVo;
-import com.cskaoyan.cskaoyanmall.service.DashboardService;
+import com.cskaoyan.cskaoyanmall.bean.RegionListRespVo;
+import com.cskaoyan.cskaoyanmall.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author viking chen
- * @date 2020/5/28 20:25
+ * @date 2020/5/29 9:09
  */
 @RestController
-public class DashboardController {
+@RequestMapping("admin/region")
+public class RegionController {
 
     @Autowired
-    DashboardService dashboardService;
+    RegionService regionService;
 
-    @RequestMapping("admin/dashboard")
-    public BaseRespVo dashboard() {
-        BaseRespVo<DashboardRespVo> resp = new BaseRespVo<>();
+    @RequestMapping("list")
+    public BaseRespVo<List<RegionListRespVo>> regionList() {
+        BaseRespVo<List<RegionListRespVo>> resp = new BaseRespVo<>();
         try {
-            resp.setData(dashboardService.getGoodsUserProductOrderTotal());
+            resp.setData(regionService.getMultilevelRegion());
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
@@ -32,4 +35,7 @@ public class DashboardController {
         resp.setErrmsg("成功");
         return resp;
     }
+
+
+
 }

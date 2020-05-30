@@ -7,6 +7,15 @@ spring:
     url: jdbc:mysql://localhost:3306/cskaoyanmall?useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
+  resources:
+    static-locations: file:E:\development\cskaoyanmall\project2${map.uploadFileDirectory}
+  mvc:
+    static-path-pattern: /wx/storage/fetch/**
+map:
+  uploadFileDirectory: /src/main/resources/static/pic
+  domain: 'http://localhost:'
+  port: ${server.port}
+  staticPath: ${spring.mvc.static-path-pattern}
 #分页插件
 pagehelper:
   helper-dialect: mysql
