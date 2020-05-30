@@ -1,5 +1,6 @@
 package com.cskaoyan.cskaoyanmall.service;
 
+import com.cskaoyan.cskaoyanmall.bean.Ad;
 import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
 
 import java.util.Map;
@@ -10,4 +11,6 @@ import java.util.Map;
  */
 public interface AdService {
     Map<String, Object> getAdListData(PagingReqVo pagingReqVo);
+
+    Ad getAdCreateData(Ad ad);
 }
