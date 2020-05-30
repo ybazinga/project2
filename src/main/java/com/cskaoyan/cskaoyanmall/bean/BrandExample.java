@@ -6,14 +6,15 @@ import java.util.Date;
 import java.util.List;
 
 public class BrandExample {
-    public BrandExample() {
-    }
-
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
+
+    public BrandExample() {
+        oredCriteria = new ArrayList<Criteria>();
+    }
 
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;

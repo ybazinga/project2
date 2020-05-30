@@ -75,15 +75,16 @@ public class AdController {
     @RequestMapping("update")
     public BaseRespVo adUpdate(@RequestBody Ad ad) {
         BaseRespVo<Ad> resp = new BaseRespVo<>();
+        Ad respAd = null;
         try {
-            adService.getAdUpdateData(ad);
+            respAd = adService.getAdUpdateData(ad);
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
             resp.setErrmsg("系统内部错误");
             return resp;
         }
-        resp.setData(ad);
+        resp.setData(respAd);
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;

@@ -61,10 +61,10 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public void getAdUpdateData(Ad ad) {
-        AdExample adExample = new AdExample();
-        adExample.createCriteria().andIdEqualTo(ad.getId());
-        adMapper.updateByExampleSelective(ad,adExample);
+    public Ad getAdUpdateData(Ad ad) {
+        ad.setUpdateTime(new Date());
+        adMapper.updateByPrimaryKeySelective(ad);
+        return ad;
     }
 
     @Override

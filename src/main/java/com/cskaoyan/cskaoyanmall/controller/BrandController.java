@@ -53,15 +53,16 @@ public class BrandController {
     @RequestMapping("update")
     public BaseRespVo brandUpdate(@RequestBody Brand brand) {
         BaseRespVo<Brand> resp = new BaseRespVo<>();
+        Brand respBrand = null;
         try {
-            brandService.updateBrand(brand);
+            respBrand = brandService.updateBrand(brand);
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
             resp.setErrmsg("系统内部错误");
             return resp;
         }
-        resp.setData(brand);
+        resp.setData(respBrand);
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;

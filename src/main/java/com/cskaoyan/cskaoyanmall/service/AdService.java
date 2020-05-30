@@ -14,7 +14,7 @@ public interface AdService {
 
     Ad getAdCreateData(Ad ad);
 
-    void getAdUpdateData(Ad ad);
+    Ad getAdUpdateData(Ad ad);
 
     void deleteAdById(Integer id);
 }
