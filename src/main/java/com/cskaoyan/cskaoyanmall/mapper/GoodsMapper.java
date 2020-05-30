@@ -1,6 +1,7 @@
 package com.cskaoyan.cskaoyanmall.mapper;
 
 import com.cskaoyan.cskaoyanmall.bean.Goods;
+import com.cskaoyan.cskaoyanmall.bean.GoodsDetails;
 import com.cskaoyan.cskaoyanmall.bean.GoodsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,8 @@ public interface GoodsMapper {
     int updateByPrimaryKeyWithBLOBs(Goods record);
 
     int updateByPrimaryKey(Goods record);
+
+
+
+
 }

@@ -29,6 +29,13 @@ public class CategoryRespVo {
     private String level;
     private List<CategoryRespVo> children;
     private Integer pid;
+
+    //杨星加
+    private Integer value;
+    private String lable;
+    //
+
+
     public Integer getId() {
         return id;
     }

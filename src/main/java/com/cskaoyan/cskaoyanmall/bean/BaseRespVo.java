@@ -14,4 +14,5 @@ public class BaseRespVo<T> {
     private T data;
     private String errmsg;
 
+
 }

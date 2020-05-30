@@ -1,9 +1,6 @@
 package com.cskaoyan.cskaoyanmall.service;
 
-import com.cskaoyan.cskaoyanmall.bean.CommonRespBaseData;
-import com.cskaoyan.cskaoyanmall.bean.Goods;
-import com.cskaoyan.cskaoyanmall.bean.GoodsExample;
-import com.cskaoyan.cskaoyanmall.bean.UserExample;
+import com.cskaoyan.cskaoyanmall.bean.*;
 import com.cskaoyan.cskaoyanmall.mapper.GoodsMapper;
 import com.cskaoyan.cskaoyanmall.mapper.UserMapper;
 import com.github.pagehelper.PageHelper;
@@ -12,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.System;
+import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("ALL")
@@ -56,5 +55,22 @@ public class GoodsServiceImpl implements GoodsService {
         commonRespBaseData.setTotal(total);
         return commonRespBaseData;
 
+    }
+
+
+
+    @Override
+    public GoodsDetails selectGoodsDetails(Integer id) {
+        return null;
+    }
+
+
+    @Override
+    public int deleteGoods(Goods goods) {
+        GoodsMapper mapper = sqlSession.getMapper(GoodsMapper.class);
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andIdEqualTo(goods.getId());
+        int i = mapper.deleteByExample(goodsExample);
+        return i;
     }
 }

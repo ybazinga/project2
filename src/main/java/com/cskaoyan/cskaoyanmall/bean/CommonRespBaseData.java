@@ -21,6 +21,4 @@ public class CommonRespBaseData<T> {
      * 查询结果列表
      */
     List<T> items;
-
-
 }
