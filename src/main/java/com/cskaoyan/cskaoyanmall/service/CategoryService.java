@@ -17,7 +17,7 @@ public interface CategoryService {
 
     void updateByLogicDelete(CategoryRespVo categoryRespVo);
 
-    void insert(Category category);
+    Category insert(Category category);
 
     void update(Category category);
 }

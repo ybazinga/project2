@@ -1,5 +1,6 @@
 package com.cskaoyan.cskaoyanmall.service;
 
+import com.cskaoyan.cskaoyanmall.bean.Comment;
 import com.cskaoyan.cskaoyanmall.bean.CommentPagingReqVo;
 
 import java.util.Map;
@@ -11,4 +12,6 @@ import java.util.Map;
 public interface CommentService {
 
     Map getCommentListData(CommentPagingReqVo commentPagingReqVo);
+
+    void updateByLogicDelete(Comment comment);
 }

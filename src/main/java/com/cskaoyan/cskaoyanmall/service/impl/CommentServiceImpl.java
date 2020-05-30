@@ -50,4 +50,13 @@ public class CommentServiceImpl implements CommentService {
         map.put("items",commentList);
         return map;
     }
+
+    @Override
+    public void updateByLogicDelete(Comment comment) {
+        CommentExample commentExample = new CommentExample();
+        comment.setDeleted(true);
+        Integer id = comment.getId();
+        commentExample.createCriteria().andIdEqualTo(id);
+        commentMapper.updateByExampleSelective(comment,commentExample);
+    }
 }
