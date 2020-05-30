@@ -118,16 +118,16 @@
         id,
       </if>
       <if test="key != null">
-        key,
+        `key`,
       </if>
       <if test="name != null">
-        name,
+        `name`,
       </if>
       <if test="type != null">
-        type,
+        `type`,
       </if>
       <if test="size != null">
-        size,
+        `size`,
       </if>
       <if test="url != null">
         url,
@@ -178,7 +178,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="getInsertId" resultType="java.lang.Integer">
+      select LAST_INSERT_ID();
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_storage
     <set>
       <if test="record.id != null">

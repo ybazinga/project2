@@ -4,7 +4,6 @@ import com.cskaoyan.cskaoyanmall.bean.User;
 import com.cskaoyan.cskaoyanmall.bean.UserExample;
 import java.util.List;
 
-import com.cskaoyan.cskaoyanmall.bean.UserRespBaseData;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

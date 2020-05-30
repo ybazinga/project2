@@ -3,9 +3,13 @@ package com.cskaoyan.cskaoyanmall.mapper;
 import com.cskaoyan.cskaoyanmall.bean.Region;
 import com.cskaoyan.cskaoyanmall.bean.RegionExample;
 import java.util.List;
+
+import com.cskaoyan.cskaoyanmall.bean.RegionListRespVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface RegionMapper {
+    List<RegionListRespVo> selectMultilevelRegion();
+
     long countByExample(RegionExample example);
 
     int deleteByExample(RegionExample example);
