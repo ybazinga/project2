@@ -1,35 +1,31 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
 import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
-import com.cskaoyan.cskaoyanmall.bean.Storage;
-import com.cskaoyan.cskaoyanmall.service.StorageService;
+import com.cskaoyan.cskaoyanmall.bean.CommentPagingReqVo;
+import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
+import com.cskaoyan.cskaoyanmall.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 /**
  *@Author: Lee et
- *@Date: Created in 16:28 2020/5/29
+ *@Date: Created in 10:35 2020/5/30
  */
 @RestController
-@RequestMapping("admin/storage")
-public class StorageController {
+@RequestMapping("admin/comment")
+public class CommentController {
     @Autowired
-    StorageService storageService;
+    CommentService commentService;
 
-    /**
-     * 图片上传
-     * spring.resources.static-locations 写死了，所以图会裂
-     * @param file 要和request请求体上的一致！！！
-     * @return
-     */
-    @RequestMapping("create")
-    public BaseRespVo create(MultipartFile file) {
+    @RequestMapping("list")
+    public BaseRespVo commentList(CommentPagingReqVo commentPagingReqVo) {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
-        Storage storage = null;
+        Map map = null;
         try {
-            storage = storageService.fileUpload(file);
+            map = commentService.getCommentListData(commentPagingReqVo);
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
@@ -37,8 +33,8 @@ public class StorageController {
             return respVo;
         }
         respVo.setErrno(0);
+        respVo.setData(map);
         respVo.setErrmsg("成功");
-        respVo.setData(storage);
         return respVo;
     }
 }
