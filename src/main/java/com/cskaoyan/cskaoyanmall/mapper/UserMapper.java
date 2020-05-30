@@ -3,9 +3,12 @@ package com.cskaoyan.cskaoyanmall.mapper;
 import com.cskaoyan.cskaoyanmall.bean.User;
 import com.cskaoyan.cskaoyanmall.bean.UserExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
+
+
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
