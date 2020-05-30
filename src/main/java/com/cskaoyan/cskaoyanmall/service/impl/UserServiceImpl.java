@@ -1,16 +1,15 @@
-package com.cskaoyan.cskaoyanmall.service;
+package com.cskaoyan.cskaoyanmall.service.impl;
 
 
 import com.cskaoyan.cskaoyanmall.bean.*;
 import com.cskaoyan.cskaoyanmall.mapper.*;
-import com.github.pagehelper.Page;
+import com.cskaoyan.cskaoyanmall.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.System;
 import java.util.List;
 
 @SuppressWarnings("ALL")
@@ -21,7 +20,7 @@ public class UserServiceImpl implements UserService {
     SqlSession sqlSession;
 
     @Autowired
-    UserRespBaseData userRespBaseData;
+    CommonRespBaseData commonRespBaseData;
 
 
     /**
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserRespBaseData selectUsers(int page, int limit, String username,String mobile,String sort, String order) {
+    public CommonRespBaseData selectUsers(int page, int limit, String username, String mobile, String sort, String order) {
         PageHelper.startPage(page, limit);
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         UserExample userExample = new UserExample();
@@ -51,15 +50,15 @@ public class UserServiceImpl implements UserService {
             userExample.createCriteria().andUsernameLike("%"+username+"%").andMobileLike("%"+mobile+"%");
         }
         List<User> users = mapper.selectByExample(userExample);
-        userRespBaseData.setItems(users);
+        commonRespBaseData.setItems(users);
         PageInfo<User> userPageInfo = new PageInfo<>(users);
         long total = userPageInfo.getTotal();
-        userRespBaseData.setTotal(total);
-        return  userRespBaseData;
+        commonRespBaseData.setTotal(total);
+        return commonRespBaseData;
     }
 
     @Override
-    public UserRespBaseData<Address> selectAddress(int page, int limit, String userId, String name, String sort, String order) {
+    public CommonRespBaseData<Address> selectAddress(int page, int limit, String userId, String name, String sort, String order) {
         PageHelper.startPage(page, limit);
         AddressMapper mapper = sqlSession.getMapper(AddressMapper.class);
         AddressExample addressExample = new AddressExample();
@@ -74,15 +73,15 @@ public class UserServiceImpl implements UserService {
             addressExample.createCriteria().andNameLike("%"+name+"%").andUserIdEqualTo(Integer.parseInt(userId));
         }
         List<Address> addresses = mapper.selectByExample(addressExample);
-        userRespBaseData.setItems(addresses);
+        commonRespBaseData.setItems(addresses);
         PageInfo<Address> userPageInfo = new PageInfo<>(addresses);
         long total = userPageInfo.getTotal();
-        userRespBaseData.setTotal(total);
-        return  userRespBaseData;
+        commonRespBaseData.setTotal(total);
+        return commonRespBaseData;
     }
 
     @Override
-    public UserRespBaseData<Collect> selectCollects(int page, int limit, String userId, String valueId, String sort, String order) {
+    public CommonRespBaseData<Collect> selectCollects(int page, int limit, String userId, String valueId, String sort, String order) {
         PageHelper.startPage(page,limit);
         CollectMapper mapper = sqlSession.getMapper(CollectMapper.class);
         CollectExample collectExample = new CollectExample();
@@ -97,15 +96,15 @@ public class UserServiceImpl implements UserService {
             collectExample.createCriteria().andUserIdEqualTo(Integer.parseInt(userId)).andValueIdEqualTo(Integer.parseInt(valueId));
         }
         List<Collect> collects = mapper.selectByExample(collectExample);
-        userRespBaseData.setItems(collects);
+        commonRespBaseData.setItems(collects);
         PageInfo<Collect> userPageInfo = new PageInfo<>(collects);
         long total = userPageInfo.getTotal();
-        userRespBaseData.setTotal(total);
-        return  userRespBaseData;
+        commonRespBaseData.setTotal(total);
+        return commonRespBaseData;
     }
 
     @Override
-    public UserRespBaseData<Footprint> selectFootPrints(int page, int limit, String userId, String goodsId, String sort, String order) {
+    public CommonRespBaseData<Footprint> selectFootPrints(int page, int limit, String userId, String goodsId, String sort, String order) {
         PageHelper.startPage(page,limit);
         FootprintMapper mapper = sqlSession.getMapper(FootprintMapper.class);
         FootprintExample footprintExample = new FootprintExample();
@@ -120,16 +119,16 @@ public class UserServiceImpl implements UserService {
             footprintExample.createCriteria().andUserIdEqualTo(Integer.parseInt(userId)).andGoodsIdEqualTo(Integer.parseInt(goodsId));
         }
         List<Footprint> footprints = mapper.selectByExample(footprintExample);
-        userRespBaseData.setItems(footprints);
+        commonRespBaseData.setItems(footprints);
         PageInfo<Footprint> userPageInfo = new PageInfo<>(footprints);
         long total = userPageInfo.getTotal();
-        userRespBaseData.setTotal(total);
-        return  userRespBaseData;
+        commonRespBaseData.setTotal(total);
+        return commonRespBaseData;
     }
 
 
     @Override
-    public UserRespBaseData<SearchHistory> selectHistories(int page, int limit, String userId, String keyword, String sort, String order) {
+    public CommonRespBaseData<SearchHistory> selectHistories(int page, int limit, String userId, String keyword, String sort, String order) {
         PageHelper.startPage(page,limit);
         SearchHistoryMapper mapper = sqlSession.getMapper(SearchHistoryMapper.class);
         SearchHistoryExample searchHistoryExample = new SearchHistoryExample();
@@ -144,16 +143,16 @@ public class UserServiceImpl implements UserService {
             searchHistoryExample.createCriteria().andUserIdEqualTo(Integer.parseInt(userId)).andKeywordLike("%"+keyword+"%");
         }
         List<SearchHistory> searchHistories = mapper.selectByExample(searchHistoryExample);
-        userRespBaseData.setItems(searchHistories);
+        commonRespBaseData.setItems(searchHistories);
         PageInfo<SearchHistory> searchHistoryPageInfo = new PageInfo<>(searchHistories);
         long total = searchHistoryPageInfo.getTotal();
-        userRespBaseData.setTotal(total);
-        return  userRespBaseData;
+        commonRespBaseData.setTotal(total);
+        return commonRespBaseData;
 
     }
 
     @Override
-    public UserRespBaseData<Feedback> selectFeedBack(int page, int limit, String id, String username, String sort, String order) {
+    public CommonRespBaseData<Feedback> selectFeedBack(int page, int limit, String id, String username, String sort, String order) {
         PageHelper.startPage(page,limit);
         FeedbackMapper mapper = sqlSession.getMapper(FeedbackMapper.class);
         FeedbackExample feedbackExample = new FeedbackExample();
@@ -168,10 +167,10 @@ public class UserServiceImpl implements UserService {
             feedbackExample.createCriteria().andUserIdEqualTo(Integer.parseInt(id)).andUsernameLike("%"+username+"%");
         }
         List<Feedback> feedbacks = mapper.selectByExample(feedbackExample);
-        userRespBaseData.setItems(feedbacks);
+        commonRespBaseData.setItems(feedbacks);
         PageInfo<Feedback> searchHistoryPageInfo = new PageInfo<>(feedbacks);
         long total = searchHistoryPageInfo.getTotal();
-        userRespBaseData.setTotal(total);
-        return  userRespBaseData;
+        commonRespBaseData.setTotal(total);
+        return commonRespBaseData;
     }
 }
