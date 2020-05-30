@@ -19,6 +19,7 @@ public class AuthController {
 
     @RequestMapping("login")
     public BaseRespVo login(@RequestBody LoginBean loginBean){
+        //System.out.println("loginnnnnnnnnnnnnnnnnn");
         BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
         objectBaseRespVo.setData("859062cc-d49d-4730-b561-c2ff944023de");
         objectBaseRespVo.setErrno(0);
