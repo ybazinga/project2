@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,11 @@ public class IssueServiceImpl implements IssueService {
     @Autowired
     IssueMapper issueMapper;
 
+    /**
+     * list 接口
+     * @param pagingReqVo
+     * @return
+     */
     @Override
     public Map<String, Object> getIssueDate(PagingReqVo pagingReqVo) {
         // 获取请求参数的参数
@@ -52,4 +58,17 @@ public class IssueServiceImpl implements IssueService {
         return map;
 
     }
+
+    @Override
+    public Issue getIssueCreateDate(Issue issue) {
+        issue.setAddTime(new Date());
+        issue.setUpdateTime(new Date());
+        issue.setDeleted(false);
+        //自动把id放入其中，按住ctrl，可查看insertSelective接口里面对应的mapper映射。
+        // 在mapperr映射中useGeneratedKeys="true" keyProperty="id"
+        issueMapper.insertSelective(issue);
+        return issue;
+    }
+
+
 }

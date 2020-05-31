@@ -1,12 +1,16 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
 import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
+import com.cskaoyan.cskaoyanmall.bean.Issue;
 import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
 import com.cskaoyan.cskaoyanmall.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +50,25 @@ public class IssueController {
             return resp;
         }
 
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+    /**
+     * 通用问题：create接口
+     */
+    @RequestMapping("create")
+    public BaseRespVo issueCreate(@RequestBody Issue issue) {
+        BaseRespVo<Issue> resp = new BaseRespVo<>();
+        try {
+            resp.setData(issueService.getIssueCreateDate(issue));
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;
