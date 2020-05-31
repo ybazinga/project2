@@ -1,7 +1,10 @@
 package com.cskaoyan.cskaoyanmall.bean;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Admin {
     private Integer id;
 
@@ -21,7 +24,7 @@ public class Admin {
 
     private Boolean deleted;
 
-    private String roleIds;
+    private Integer[] roleIds;
 
     public Integer getId() {
         return id;
@@ -95,11 +98,4 @@ public class Admin {
         this.deleted = deleted;
     }
 
-    public String getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds == null ? null : roleIds.trim();
-    }
 }

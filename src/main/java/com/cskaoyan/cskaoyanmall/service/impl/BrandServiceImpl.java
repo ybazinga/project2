@@ -10,8 +10,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,10 +55,10 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void updateBrand(Brand brand) {
-        BrandExample brandExample = new BrandExample();
-        brandExample.createCriteria().andIdEqualTo(brand.getId());
-        brandMapper.updateByExampleSelective(brand,brandExample);
+    public Brand updateBrand(Brand brand) {
+        brand.setUpdateTime(new Date());
+        brandMapper.updateByPrimaryKeySelective(brand);
+        return brand;
     }
 
     @Override

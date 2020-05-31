@@ -13,4 +13,8 @@ public interface AdService {
     Map<String, Object> getAdListData(PagingReqVo pagingReqVo);
 
     Ad getAdCreateData(Ad ad);
+
+    Ad getAdUpdateData(Ad ad);
+
+    void deleteAdById(Integer id);
 }
