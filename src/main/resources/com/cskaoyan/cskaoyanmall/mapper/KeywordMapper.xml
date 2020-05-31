@@ -103,7 +103,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.cskaoyanmall.bean.Keyword">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+          parameterType="com.cskaoyan.cskaoyanmall.bean.Keyword">
     insert into cskaoyanmall_keyword (id, keyword, url, 
       is_hot, is_default, sort_order, 
       add_time, update_time, deleted
