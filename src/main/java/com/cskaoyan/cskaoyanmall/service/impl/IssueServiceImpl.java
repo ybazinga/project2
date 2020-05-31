@@ -28,7 +28,7 @@ public class IssueServiceImpl implements IssueService {
     IssueMapper issueMapper;
 
     /**
-     * list 接口
+     * issue/list
      * @param pagingReqVo
      * @return
      */
@@ -59,8 +59,14 @@ public class IssueServiceImpl implements IssueService {
 
     }
 
+    /**
+     * issue/create
+     * @param issue
+     * @return
+     */
     @Override
     public Issue getIssueCreateDate(Issue issue) {
+        // 注意去bean里把时间的格式标准化
         issue.setAddTime(new Date());
         issue.setUpdateTime(new Date());
         issue.setDeleted(false);
@@ -68,6 +74,33 @@ public class IssueServiceImpl implements IssueService {
         // 在mapperr映射中useGeneratedKeys="true" keyProperty="id"
         issueMapper.insertSelective(issue);
         return issue;
+    }
+
+    /**
+     * issue/update
+     * @param issue
+     * @return
+     */
+    @Override
+    public Issue getIssueUpdateDate(Issue issue) {
+        issue.setUpdateTime(new Date());
+        // 根据主键来更新，Selective是判断是否为空，为空就不能更新
+        issueMapper.updateByPrimaryKeySelective(issue);
+        return issue;
+    }
+
+    /**
+     * /issue/delete
+     * @param id
+     */
+    @Override
+    public void deleteIssueById(Integer id) {
+        IssueExample issueExample = new IssueExample();
+        // 相当于加了一句where id = ？
+        issueExample.createCriteria().andIdEqualTo(id);
+        Issue issue = new Issue();
+        issue.setDeleted(true);
+        issueMapper.updateByExampleSelective(issue,issueExample);
     }
 
 

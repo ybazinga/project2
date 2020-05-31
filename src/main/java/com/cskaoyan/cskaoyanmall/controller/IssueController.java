@@ -56,13 +56,58 @@ public class IssueController {
     }
 
     /**
-     * 通用问题：create接口
+     * 通用问题：添加
      */
     @RequestMapping("create")
     public BaseRespVo issueCreate(@RequestBody Issue issue) {
         BaseRespVo<Issue> resp = new BaseRespVo<>();
         try {
             resp.setData(issueService.getIssueCreateDate(issue));
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+    /**
+     * 通用问题：编辑
+     */
+    @RequestMapping("update")
+    public BaseRespVo issueUpdate(@RequestBody Issue issue) {
+        BaseRespVo<Issue> resp = new BaseRespVo<>();
+        // 这个是更新后的resp
+        Issue respIssue = null;
+        try {
+            // 主要就是更新update里面的时间
+            respIssue = issueService.getIssueUpdateDate(issue);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setData(respIssue);
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+    /**
+     * 通用问题：删除
+     * 就是把deleted状态码从false改成true
+     * @param issue
+     * @return
+     */
+    @RequestMapping("delete")
+    public BaseRespVo issueDelete(@RequestBody Issue issue) {
+        BaseRespVo<Issue> resp = new BaseRespVo<>();
+        try {
+            issueService.deleteIssueById(issue.getId());
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);

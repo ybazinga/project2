@@ -16,4 +16,9 @@ public interface IssueService {
 
 
     Issue getIssueCreateDate(Issue issue);
+
+    Issue getIssueUpdateDate(Issue issue);
+
+
+    void deleteIssueById(Integer id);
 }
