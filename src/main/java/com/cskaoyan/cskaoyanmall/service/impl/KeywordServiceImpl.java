@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,5 +36,26 @@ public class KeywordServiceImpl implements com.cskaoyan.cskaoyanmall.service.Key
         return kwListRespVo;
     }
 
+    @Override
+    public Keyword create(Keyword keyword) {
+        keyword.setSortOrder(100);
+        keyword.setAddTime(new Date());
+        keyword.setUpdateTime(new Date());
+        keyword.setDeleted(false);
+        keywordMapper.insert(keyword);
+        return keyword;
+    }
 
+    @Override
+    public Keyword update(Keyword keyword) {
+        keyword.setUpdateTime(new Date());
+        keywordMapper.updateByPrimaryKeySelective(keyword);
+        return keyword;
+    }
+
+    @Override
+    public void updateByLogicDelete(Keyword keyword) {
+        keyword.setDeleted(false);
+        keywordMapper.updateByPrimaryKeySelective(keyword);
+    }
 }

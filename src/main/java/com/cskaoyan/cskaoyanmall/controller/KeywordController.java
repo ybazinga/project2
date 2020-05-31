@@ -40,19 +40,30 @@ public class KeywordController {
     }
 
     @RequestMapping("create")
-    public BaseRespVo create(@RequestBody Map map) {
-        String keyword = (String) map.get("keyword");
-        String url = (String) map.get("url");
-        String isHotS = (String) map.get("isHot");
-        Boolean isHot = Boolean.valueOf(isHotS);
-        String isDefaultS = (String) map.get("isDefault");
-        Boolean isDefault = Boolean.valueOf(isDefaultS);
-
-        Keyword keyword1 = keywordService.create(keyword, url, isHot, isDefault);
+    public BaseRespVo create(@RequestBody Keyword keyword) {
+        Keyword keywordResp = keywordService.create(keyword);
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
         baseRespVo.setErrno(0);
-        baseRespVo.setData(keyword1);
+        baseRespVo.setData(keywordResp);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
+    @RequestMapping("update")
+    public BaseRespVo update(@RequestBody Keyword keyword) {
+        Keyword keywordResp = keywordService.update(keyword);
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        baseRespVo.setErrno(0);
+        baseRespVo.setData(keywordResp);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+    @RequestMapping("delete")
+    public BaseRespVo delete(@RequestBody Keyword keyword) {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        keywordService.updateByLogicDelete(keyword);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
 }
