@@ -35,15 +35,5 @@ public class KeywordServiceImpl implements com.cskaoyan.cskaoyanmall.service.Key
         return kwListRespVo;
     }
 
-    @Override
-    public Keyword create(String keyword, String url, Boolean isHot, Boolean isDefault) {
 
-        Keyword keyword1 = new Keyword();
-        keyword1.setKeyword(keyword);
-        keyword1.setUrl(url);
-        keyword1.setIsHot(isHot?0:1);
-        keywordMapper.insert(keyword1);
-
-        return null;
-    }
 }

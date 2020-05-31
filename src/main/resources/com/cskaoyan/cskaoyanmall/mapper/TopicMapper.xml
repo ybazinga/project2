@@ -130,7 +130,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.cskaoyanmall.bean.Topic">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+          parameterType="com.cskaoyan.cskaoyanmall.bean.Topic">
     insert into cskaoyanmall_topic (id, title, subtitle, 
       price, read_count, pic_url, 
       sort_order, goods, add_time, 
@@ -227,7 +228,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="getLastInsertId" resultType="java.lang.Integer">
+      select LAST_INSERT_ID();
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_topic
     <set>
       <if test="record.id != null">

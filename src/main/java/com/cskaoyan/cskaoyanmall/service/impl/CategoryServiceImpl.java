@@ -49,41 +49,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void insert(Category category) {
+    public Category insert(Category category) {
         category.setAddTime(new Date());
         category.setUpdateTime(new Date());
+        //insert标签中使用useGeneratedKey → 可以获得自增的主键
         categoryMapper.insertSelective(category);
+        return category;
     }
 
     @Override
     public void update(Category category) {
         category.setUpdateTime(new Date());
-        Integer id = category.getId();
-        CategoryExample categoryExample = new CategoryExample();
-        categoryExample.createCriteria().andIdEqualTo(id);
-        categoryMapper.updateByExampleSelective(category,categoryExample);
+        categoryMapper.updateByPrimaryKeySelective(category);
     }
 
-/*@Override
-    public void update(CategoryRespVo categoryRespVo) {
-        Category category = new Category();
-        category.setUpdateTime(new Date());
-        int id = categoryRespVo.getId();
-        category.setId(id);
-        category.setName(categoryRespVo.getName());
-        category.setKeywords(categoryRespVo.getKeywords());
-        category.setIconUrl(categoryRespVo.getIconUrl());
-        category.setPicUrl(categoryRespVo.getPicUrl());
-        category.setLevel(categoryRespVo.getLevel());
-        category.setPid(categoryRespVo.getPid());
-        CategoryExample categoryExample = new CategoryExample();
-        categoryExample.createCriteria().andIdEqualTo(id);
-        categoryMapper.updateByExampleSelective(category,categoryExample);
-
-        // 更新children数组中的category
-        List<CategoryRespVo> children = categoryRespVo.getChildren();
-        for (CategoryRespVo child : children) {
-        }
-
-    }*/
 }

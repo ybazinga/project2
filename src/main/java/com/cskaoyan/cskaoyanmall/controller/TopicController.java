@@ -1,56 +1,30 @@
 package com.cskaoyan.cskaoyanmall.controller;
 
 import com.cskaoyan.cskaoyanmall.bean.*;
-import com.cskaoyan.cskaoyanmall.service.StorageService;
+import com.cskaoyan.cskaoyanmall.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
 /**
  *@Author: Lee et
- *@Date: Created in 16:28 2020/5/29
+ *@Date: Created in 15:31 2020/5/30
  */
 @RestController
-@RequestMapping("admin/storage")
-public class StorageController {
+@RequestMapping("admin/topic")
+public class TopicController {
     @Autowired
-    StorageService storageService;
-
-    /**
-     * 图片上传
-     * spring.resources.static-locations 写死了，所以图会裂
-     * form-data; name="file"
-     * @param file 要和request请求体上的name的value一致！！！
-     * @return
-     */
-    @RequestMapping("create")
-    public BaseRespVo create(MultipartFile file) {
-        BaseRespVo<Object> respVo = new BaseRespVo<>();
-        Storage storage = null;
-        try {
-            storage = storageService.fileUpload(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-            respVo.setErrno(502);
-            respVo.setErrmsg("系统内部错误");
-            return respVo;
-        }
-        respVo.setErrno(0);
-        respVo.setErrmsg("成功");
-        respVo.setData(storage);
-        return respVo;
-    }
+    TopicService topicService;
 
     @RequestMapping("list")
-    public BaseRespVo storageList(StoragePagingReqVo storagePagingReqVo) {
+    public BaseRespVo topicList(TopicPagingReqVo topicPagingReqVo) {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
         Map map = null;
         try {
-            map = storageService.getStorageListData(storagePagingReqVo);
+            map = topicService.getTopicListData(topicPagingReqVo);
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
@@ -63,12 +37,30 @@ public class StorageController {
         return respVo;
     }
 
-    @RequestMapping("update")
-    public BaseRespVo update(@RequestBody Storage storage) {
+    @RequestMapping("create")
+    public BaseRespVo createTopic(@RequestBody Topic topic) {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
-        Storage storageResp = null;
+        Topic topicResp = null;
         try {
-            storageResp = storageService.update(storage);
+            topicResp = topicService.insert(topic);
+        } catch (Exception e) {
+            e.printStackTrace();
+            respVo.setErrno(502);
+            respVo.setErrmsg("系统内部错误");
+            return respVo;
+        }
+        respVo.setData(topicResp);
+        respVo.setErrno(0);
+        respVo.setErrmsg("成功");
+        return respVo;
+    }
+
+    @RequestMapping("update")
+    public BaseRespVo update(@RequestBody Topic topic) {
+        BaseRespVo<Object> respVo = new BaseRespVo<>();
+        Topic topicResp = null;
+        try {
+            topicResp = topicService.update(topic);
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
@@ -77,15 +69,15 @@ public class StorageController {
         }
         respVo.setErrno(0);
         respVo.setErrmsg("成功");
-        respVo.setData(storageResp);
+        respVo.setData(topicResp);
         return respVo;
     }
 
     @RequestMapping("delete")
-    public BaseRespVo delete(@RequestBody Storage storage) {
+    public BaseRespVo delete(@RequestBody Topic topic) {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
         try {
-            storageService.updateByLogicDelete(storage);
+            topicService.updateByLogicDelete(topic);
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
