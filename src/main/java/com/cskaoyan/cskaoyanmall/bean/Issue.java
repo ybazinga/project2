@@ -1,5 +1,7 @@
 package com.cskaoyan.cskaoyanmall.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Issue {
@@ -9,8 +11,11 @@ public class Issue {
 
     private String answer;
 
+    // 标准化时间格式
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;

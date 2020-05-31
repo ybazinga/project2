@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, link, url, position, content, start_time, end_time, enabled, add_time, 
+    id, `name`, link, url, position, content, start_time, end_time, enabled, add_time,
     update_time, deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.cskaoyanmall.bean.AdExample" resultMap="BaseResultMap">
@@ -92,7 +92,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyanmall_ad
     where id = #{id,jdbcType=INTEGER}
@@ -108,14 +108,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.cskaoyanmall.bean.Ad">
-    insert into cskaoyanmall_ad (id, name, link, 
-      url, position, content, 
-      start_time, end_time, enabled, 
+    insert into cskaoyanmall_ad (id, `name`, link,
+      url, `position`, content,
+      start_time, end_time, enabled,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{position,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR}, #{position,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -126,7 +126,7 @@
         id,
       </if>
       <if test="name != null">
-        name,
+        `name`,
       </if>
       <if test="link != null">
         link,
@@ -135,7 +135,7 @@
         url,
       </if>
       <if test="position != null">
-        position,
+        `position`,
       </if>
       <if test="content != null">
         content,
@@ -199,19 +199,19 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.cskaoyan.cskaoyanmall.bean.AdExample" resultType="java.lang.Long">
-    select count(*) from cskaoyanmall_ad
+    select count(*) from cskaoyanmall_ad sort
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_ad
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.link != null">
         link = #{record.link,jdbcType=VARCHAR},
@@ -220,7 +220,7 @@
         url = #{record.url,jdbcType=VARCHAR},
       </if>
       <if test="record.position != null">
-        position = #{record.position,jdbcType=TINYINT},
+        `position` = #{record.position,jdbcType=TINYINT},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
@@ -251,10 +251,10 @@
   <update id="updateByExample" parameterType="map">
     update cskaoyanmall_ad
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
       link = #{record.link,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
-      position = #{record.position,jdbcType=TINYINT},
+      `position` = #{record.position,jdbcType=TINYINT},
       content = #{record.content,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
@@ -307,10 +307,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cskaoyan.cskaoyanmall.bean.Ad">
     update cskaoyanmall_ad
-    set name = #{name,jdbcType=VARCHAR},
+    set `name` = #{name,jdbcType=VARCHAR},
       link = #{link,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      position = #{position,jdbcType=TINYINT},
+      `position` = #{position,jdbcType=TINYINT},
       content = #{content,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
@@ -320,4 +320,10 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!---->
+  <select id="getLastInsertId" resultType="java.lang.Integer">
+      select LAST_INSERT_ID();
+  </select>
+
+
 </mapper>

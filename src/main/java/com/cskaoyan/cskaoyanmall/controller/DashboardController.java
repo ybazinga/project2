@@ -19,10 +19,17 @@ public class DashboardController {
 
     @RequestMapping("admin/dashboard")
     public BaseRespVo dashboard() {
-        BaseRespVo<DashboardRespVo> baseRespVo = new BaseRespVo<>();
-        baseRespVo.setErrno(0);
-        baseRespVo.setData(dashboardService.getGoodsUserProductOrderTotal());
-        baseRespVo.setErrmsg("成功");
-        return baseRespVo;
+        BaseRespVo<DashboardRespVo> resp = new BaseRespVo<>();
+        try {
+            resp.setData(dashboardService.getGoodsUserProductOrderTotal());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
     }
 }

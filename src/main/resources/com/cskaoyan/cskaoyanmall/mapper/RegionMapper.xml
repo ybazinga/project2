@@ -84,7 +84,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyanmall_region
     where id = #{id,jdbcType=INTEGER}
@@ -100,9 +100,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.cskaoyanmall.bean.Region">
-    insert into cskaoyanmall_region (id, pid, name, 
+    insert into cskaoyanmall_region (id, pid, name,
       type, code)
-    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
       #{type,jdbcType=TINYINT}, #{code,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.cskaoyanmall.bean.Region">
@@ -148,7 +148,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_region
     <set>
       <if test="record.id != null">
@@ -208,4 +208,43 @@
       code = #{code,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--selectMultilevelRegion By CHQ-->
+  <resultMap id="regionListMap" type="com.cskaoyan.cskaoyanmall.bean.RegionListRespVo">
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="type" property="type"/>
+    <result column="code" property="code"/>
+    <collection property="children" ofType="com.cskaoyan.cskaoyanmall.bean.RegionListRespVo">
+      <result column="bid" property="id"/>
+      <result column="bname" property="name"/>
+      <result column="btype" property="type"/>
+      <result column="bcode" property="code"/>
+      <collection property="children" ofType="com.cskaoyan.cskaoyanmall.bean.RegionListRespVo">
+        <result column="cid" property="id"/>
+        <result column="cname" property="name"/>
+        <result column="ctype" property="type"/>
+        <result column="ccode" property="code"/>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <select id="selectMultilevelRegion" resultMap="regionListMap">
+      select
+        a.id,
+        a.`name`,
+        a.type,
+        a.`code`,
+        b.id as bid,
+        b.`name` as bname,
+        b.type as btype,
+        b.`code` as bcode,
+        c.id as cid,
+        c.`name` as cname,
+        c.type as ctype,
+        c.`code` as ccode
+      from cskaoyanmall_region as a
+      JOIN cskaoyanmall_region as b on a.id = b.pid
+      JOIN cskaoyanmall_region as c on b.id = c.pid
+  </select>
 </mapper>

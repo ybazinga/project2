@@ -1,11 +1,13 @@
 package com.cskaoyan.cskaoyanmall.mapper;
 
-import com.cskaoyan.cskaoyanmall.bean.Category;
-import com.cskaoyan.cskaoyanmall.bean.CategoryExample;
+import com.cskaoyan.cskaoyanmall.bean.*;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CategoryMapper {
+
     long countByExample(CategoryExample example);
 
     int deleteByExample(CategoryExample example);
@@ -27,4 +29,12 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<CategoryRespVo> selectByLevelWithJoin(@Param("level") String level);
+
+    List<CategoryL1RespVo> selectByLevel(@Param("level") String level);
+
+    List<CategoryList> selectCategoryList();
+
+    int selectPidByCategoryId(@Param("categoryId") int categoryId);
 }
