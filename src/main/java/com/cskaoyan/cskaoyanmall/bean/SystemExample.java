@@ -215,7 +215,7 @@ public class SystemExample {
             return (Criteria) this;
         }
 
-        public Criteria andKeyNameIn(List<String> values) {
+        public Criteria andKeyNameIn(String[] values) {
             addCriterion("key_name in", values, "keyName");
             return (Criteria) this;
         }

@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cskaoyanmall_system
     where id = #{id,jdbcType=INTEGER}
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.cskaoyanmall.bean.System">
-    insert into cskaoyanmall_system (id, key_name, key_value, 
+    insert into cskaoyanmall_system (id, key_name, key_value,
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -157,6 +157,96 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+
+
+
+  <select id="selectConfig" resultType="com.cskaoyan.cskaoyanmall.bean.SystemConfigRespVo">
+    select  distinct  key_name ,key_value from cskaoyanmall_system where
+    key_name in ('cskaoyan_mall_mall_name','cskaoyan_mall_mall_qq','cskaoyan_mall_mall_phone',
+    'cskaoyan_mall_mall_address')
+  </select>
+
+
+
+
+  <select id="selectName" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_mall_name from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_mall_name'
+  </select>
+  <select id="selectAddress" resultType="java.lang.String">
+
+    select distinct key_value as cskaoyan_mall_mall_address from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_mall_address'
+  </select>
+  <select id="selectQQ" resultType="java.lang.String">
+
+    select distinct key_value as cskaoyan_mall_mall_qq from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_mall_qq'
+  </select>
+  <select id="selectPhone" resultType="java.lang.String">
+
+    select distinct key_value as cskaoyan_mall_mall_phone from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_mall_phone'
+  </select>
+
+
+  <select id="selectFreightvalue" resultType="java.lang.String">
+      select distinct key_value as cskaoyan_mall_express_freight_value from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_express_freight_value'
+  </select>
+  <select id="selectFreightMin" resultType="java.lang.String">
+      select distinct key_value as cskaoyan_mall_express_freight_min from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_express_freight_min'
+  </select>
+
+
+  <select id="selectUnconfirm" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_order_unconfirm from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_order_unconfirm'
+  </select>
+  <select id="selectUnpaid" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_order_unpaid from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_order_unpaid'
+  </select>
+  <select id="selectComment" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_order_comment from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_order_comment'
+  </select>
+
+
+  <select id="selectShare" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_wx_share from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_share'
+
+  </select>
+  <select id="selectBrand" resultType="java.lang.String">
+     select distinct key_value as cskaoyan_mall_wx_index_brand from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_index_brand'
+
+  </select>
+  <select id="selectTopic" resultType="java.lang.String">
+      select distinct key_value as cskaoyan_mall_wx_index_topic from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_index_topic'
+  </select>
+  <select id="selectHot" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_wx_index_hot from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_index_hot'
+  </select>
+  <select id="selectGoods" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_wx_catlog_goods from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_catlog_goods'
+  </select>
+  <select id="selectList" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_wx_catlog_list from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_catlog_list'
+  </select>
+  <select id="selectNew" resultType="java.lang.String">
+    select distinct key_value as cskaoyan_mall_wx_index_new from cskaoyanmall_system
+    where key_name = 'cskaoyan_mall_wx_index_new'
+  </select>
+
+
   <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_system
     <set>
@@ -225,4 +315,77 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <update id="updateValueOfMallName">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_mall_name} where key_name = 'cskaoyan_mall_mall_name'
+  </update>
+  <update id="updateValueOfMallAdress">
+update cskaoyanmall_system set key_value = #{cskaoyan_mall_mall_address} where key_name = 'cskaoyan_mall_mall_address'
+  </update>
+  <update id="updateValueOfMallPhone">
+
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_mall_phone} where key_name = 'cskaoyan_mall_mall_phone'
+  </update>
+  <update id="updateValueOfMallQQ">
+
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_mall_qq} where key_name = 'cskaoyan_mall_mall_qq'
+
+
+  </update>
+
+
+  <update id="updateVauleOfFreightValue">
+  update cskaoyanmall_system set key_value = #{cskaoyan_mall_express_freight_value}
+  where key_name = 'cskaoyan_mall_express_freight_value'
+
+  </update>
+  <update id="updateVauleOfFreightMin">
+update cskaoyanmall_system set key_value = #{cskaoyan_mall_express_freight_min}
+  where key_name = 'cskaoyan_mall_express_freight_min'
+  </update>
+  <update id="updateValueOfConfirm">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_order_unconfirm}
+  where key_name = 'cskaoyan_mall_order_unconfirm'
+  </update>
+  <update id="updateValueOfPaid">
+
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_order_unpaid}
+  where key_name = 'cskaoyan_mall_order_unpaid'
+  </update>
+  <update id="updateValueOfComment">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_order_comment}
+  where key_name = 'cskaoyan_mall_order_comment'
+  </update>
+  <update id="updateValueOfShare">
+
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_share}
+  where key_name = 'cskaoyan_mall_wx_share'
+  </update>
+  <update id="updateValueOfBrand">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_index_brand}
+  where key_name = 'cskaoyan_mall_wx_index_brand'
+  </update>
+  <update id="updateValueOfTopic">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_index_topic}
+  where key_name = 'cskaoyan_mall_wx_index_topic'
+  </update>
+  <update id="updateValueOfHot">
+     update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_index_hot}
+  where key_name = 'cskaoyan_mall_wx_index_hot'
+  </update>
+  <update id="updateValueOfGoods">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_catlog_goods}
+  where key_name = 'cskaoyan_mall_wx_catlog_goods'
+  </update>
+  <update id="updateValueOfList">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_catlog_list}
+  where key_name = 'cskaoyan_mall_wx_catlog_list'
+  </update>
+  <update id="updateValueOfNew">
+    update cskaoyanmall_system set key_value = #{cskaoyan_mall_wx_index_new}
+  where key_name = 'cskaoyan_mall_wx_index_new'
+  </update>
+
+
 </mapper>
