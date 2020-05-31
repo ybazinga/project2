@@ -234,6 +234,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_user
     <set>
@@ -382,4 +383,10 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="selectByid" resultType="com.cskaoyan.cskaoyanmall.bean.User">
+   select <include refid="Base_Column_List"/> from cskaoyanmall_user where id=1
+  </select>
 </mapper>
