@@ -1,8 +1,12 @@
 package com.cskaoyan.cskaoyanmall.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Data
 public class Topic {
     private Integer id;
 
@@ -18,10 +22,12 @@ public class Topic {
 
     private Integer sortOrder;
 
-    private String goods;
+    private String[] goods;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
@@ -84,13 +90,6 @@ public class Topic {
         this.sortOrder = sortOrder;
     }
 
-    public String getGoods() {
-        return goods;
-    }
-
-    public void setGoods(String goods) {
-        this.goods = goods == null ? null : goods.trim();
-    }
 
     public Date getAddTime() {
         return addTime;

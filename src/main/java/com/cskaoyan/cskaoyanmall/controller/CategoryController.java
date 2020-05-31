@@ -78,8 +78,9 @@ public class CategoryController {
             respVo.setErrmsg("参数错误：创建二级类目必须选择一级类目");
             return respVo;
         }
+        Category categoryResp = null;
         try {
-            categoryService.insert(category);
+            categoryResp = categoryService.insert(category);
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
@@ -88,6 +89,7 @@ public class CategoryController {
         }
         respVo.setErrno(0);
         respVo.setErrmsg("成功");
+        respVo.setData(categoryResp);
         return respVo;
     }
 

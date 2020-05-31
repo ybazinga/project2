@@ -12,7 +12,7 @@ import java.util.Map;
 public interface BrandService {
     Map<String, Object> getBrandListData(PagingReqVo pagingReqVo);
 
-    void updateBrand(Brand brand);
+    Brand updateBrand(Brand brand);
 
     void deleteBrandById(Integer id);
 
