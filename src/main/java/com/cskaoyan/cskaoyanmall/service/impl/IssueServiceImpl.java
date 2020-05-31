@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * @Auther: LJJ
  * @Date: 2020/5/30 15:11
- * @Description: TODO
+ * @Description: 通用问题
  */
 // 写个注解，不然controller里的 @Autowired无法自动获取实例
 @Service
