@@ -34,7 +34,7 @@ public class StatController {
         BaseRespVo<Object> respVo = new BaseRespVo<>();
         Map map = null;
         try {
-            map = statService.getGoodsSatat();
+            map = statService.getGoodsStat();
         } catch (Exception e) {
             e.printStackTrace();
             respVo.setErrno(502);
@@ -45,5 +45,16 @@ public class StatController {
         respVo.setErrno(0);
         respVo.setErrmsg("成功");
         return respVo;
+    }
+
+    @RequestMapping("user")
+    public BaseRespVo getUserStat() {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        Map map = statService.getUserStat();
+        baseRespVo.setErrno(0);
+        baseRespVo.setData(map);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+
     }
 }

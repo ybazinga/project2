@@ -9,5 +9,8 @@ import java.util.Map;
 public interface StatService {
     Map getOrderStat();
 
-    Map getGoodsSatat();
+
+    Map getGoodsStat();
+
+    Map getUserStat();
 }
