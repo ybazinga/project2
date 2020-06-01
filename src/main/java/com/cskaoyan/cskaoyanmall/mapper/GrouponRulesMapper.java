@@ -27,4 +27,10 @@ public interface GrouponRulesMapper {
     int updateByPrimaryKeySelective(GrouponRules record);
 
     int updateByPrimaryKey(GrouponRules record);
+
+    int getLastInsertId();
+
+    int delectGroupReles(@Param("id") Integer id);
+
+    List<GrouponRules> selectByExampleDelete(@Param("grouponRulesExample") GrouponRulesExample grouponRulesExample);
 }

@@ -540,4 +540,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--<update id="updateByStatus">
+    update cskaoyanmall_order order_status=#{}ship_channel,
+  </update>-->
 </mapper>
