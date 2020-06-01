@@ -27,4 +27,14 @@ public class StatController {
         respVo.setErrmsg("成功");
         return respVo;
     }
+
+    @RequestMapping("user")
+    public BaseRespVo getUserStat() {
+        BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
+        Map map = statService.getUserStat();
+        baseRespVo.setErrno(0);
+        baseRespVo.setData(map);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
 }

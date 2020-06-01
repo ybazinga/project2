@@ -4,6 +4,7 @@ import com.cskaoyan.cskaoyanmall.bean.User;
 import com.cskaoyan.cskaoyanmall.bean.UserExample;
 import java.util.List;
 
+import com.cskaoyan.cskaoyanmall.bean.UserStat;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -30,6 +31,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<UserStat> selectUserStat();
 
     //User selectByid();
 }
