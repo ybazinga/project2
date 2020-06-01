@@ -23,7 +23,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public Map<String, Object> getOrderDetail(Integer id) {
         OrderGoods orderGoods = orderGoodsMapper.selectByPrimaryKey(id);
-        User user1 = user.selectByid();
+        //User user1 = user.selectByid();
+        User user1 = this.user.selectByPrimaryKey(1);
         Order order1 =order.selectByPrimaryKey(id);
 
         HashMap<String,Object> map = new HashMap<>();

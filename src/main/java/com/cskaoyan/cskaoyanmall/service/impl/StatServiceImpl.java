@@ -1,11 +1,13 @@
 package com.cskaoyan.cskaoyanmall.service.impl;
 
+import com.cskaoyan.cskaoyanmall.bean.OrderExample;
 import com.cskaoyan.cskaoyanmall.mapper.StatMapper;
 import com.cskaoyan.cskaoyanmall.service.StatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +22,12 @@ public class StatServiceImpl implements StatService {
 
     @Override
     public Map getOrderStat() {
+
+
+        OrderExample orderExample = new OrderExample();
+        OrderExample.Criteria criteria = orderExample.createCriteria();
         
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String, Object>();
         ArrayList<String> columnList = new ArrayList<>();
         columnList.add("day");
         columnList.add("orders");
@@ -29,6 +35,6 @@ public class StatServiceImpl implements StatService {
         columnList.add("amount");
         columnList.add("pcr");
         map.put("columns",columnList);
-        return null;
+        return map;
     }
 }
