@@ -4,6 +4,8 @@ import com.cskaoyan.cskaoyanmall.bean.Goods;
 import com.cskaoyan.cskaoyanmall.bean.GoodsDetails;
 import com.cskaoyan.cskaoyanmall.bean.GoodsExample;
 import java.util.List;
+
+import com.cskaoyan.cskaoyanmall.bean.GoodsStat;
 import org.apache.ibatis.annotations.Param;
 
 public interface GoodsMapper {
@@ -39,4 +41,6 @@ public interface GoodsMapper {
     int selectCatrgoryId(@Param("id") Integer id);
 
     Goods selectGoodsById(@Param("id") Integer id);
+
+    List<GoodsStat> selectGoodsStat();
 }
