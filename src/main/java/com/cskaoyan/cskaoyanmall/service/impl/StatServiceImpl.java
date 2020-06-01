@@ -1,6 +1,7 @@
 package com.cskaoyan.cskaoyanmall.service.impl;
 
 import com.cskaoyan.cskaoyanmall.bean.OrderExample;
+import com.cskaoyan.cskaoyanmall.bean.UserExample;
 import com.cskaoyan.cskaoyanmall.mapper.StatMapper;
 import com.cskaoyan.cskaoyanmall.service.StatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,13 @@ public class StatServiceImpl implements StatService {
         columnList.add("pcr");
         map.put("columns",columnList);
         return map;
+    }
+
+    @Override
+    public Map getUserStat() {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.
+        return null;
     }
 }
