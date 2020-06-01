@@ -1,8 +1,8 @@
 package com.cskaoyan.cskaoyanmall.service.impl;
 
-import com.cskaoyan.cskaoyanmall.bean.OrderExample;
-import com.cskaoyan.cskaoyanmall.bean.UserExample;
+import com.cskaoyan.cskaoyanmall.bean.GoodsStat;
 import com.cskaoyan.cskaoyanmall.bean.OrderStat;
+import com.cskaoyan.cskaoyanmall.mapper.GoodsMapper;
 import com.cskaoyan.cskaoyanmall.bean.UserStat;
 import com.cskaoyan.cskaoyanmall.mapper.OrderMapper;
 import com.cskaoyan.cskaoyanmall.mapper.UserMapper;
@@ -22,6 +22,9 @@ public class StatServiceImpl implements StatService {
     OrderMapper orderMapper;
 
     @Autowired
+    GoodsMapper goodsMapper;
+
+    @Autowired
     UserMapper userMapper;
 
     @Override
@@ -37,6 +40,29 @@ public class StatServiceImpl implements StatService {
 
         List<OrderStat> orderStatList = orderMapper.selectOrderStat();
         map.put("rows", orderStatList);
+        return map;
+    }
+
+
+
+    /**
+     * /stat/goods
+     * @return
+     */
+    @Override
+    public Map getGoodsStat() {
+        // 用map类型来接收
+        Map<Object, Object> map = new HashMap<>();
+        ArrayList<String> columList = new ArrayList<>();
+        columList.add("day");
+        columList.add("orders");
+        columList.add("products");
+        columList.add("amount");
+        map.put("columns", columList);
+
+        // 此处存疑，对于下单货品数量、下单货品总额定义不清楚。需根据前端确定
+        List<GoodsStat> goodsStatList = goodsMapper.selectGoodsStat();
+        map.put("rows", goodsStatList);
         return map;
     }
 
