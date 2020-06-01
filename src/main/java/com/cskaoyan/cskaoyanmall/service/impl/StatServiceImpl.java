@@ -2,15 +2,15 @@ package com.cskaoyan.cskaoyanmall.service.impl;
 
 import com.cskaoyan.cskaoyanmall.bean.OrderExample;
 import com.cskaoyan.cskaoyanmall.bean.UserExample;
-import com.cskaoyan.cskaoyanmall.mapper.StatMapper;
+import com.cskaoyan.cskaoyanmall.bean.OrderStat;
+import com.cskaoyan.cskaoyanmall.bean.UserStat;
+import com.cskaoyan.cskaoyanmall.mapper.OrderMapper;
+import com.cskaoyan.cskaoyanmall.mapper.UserMapper;
 import com.cskaoyan.cskaoyanmall.service.StatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  *@Author: Lee et
@@ -19,31 +19,37 @@ import java.util.Map;
 @Service
 public class StatServiceImpl implements StatService {
     @Autowired
-    StatMapper statMapper;
+    OrderMapper orderMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public Map getOrderStat() {
-
-
-        OrderExample orderExample = new OrderExample();
-        OrderExample.Criteria criteria = orderExample.createCriteria();
-        
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         ArrayList<String> columnList = new ArrayList<>();
         columnList.add("day");
         columnList.add("orders");
         columnList.add("customers");
         columnList.add("amount");
         columnList.add("pcr");
-        map.put("columns",columnList);
+        map.put("columns", columnList);
+
+        List<OrderStat> orderStatList = orderMapper.selectOrderStat();
+        map.put("rows", orderStatList);
         return map;
     }
 
     @Override
     public Map getUserStat() {
-        UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.
-        return null;
+        HashMap<String, Object> map = new HashMap<>();
+        ArrayList<String> columnList = new ArrayList<>();
+        columnList.add("day");
+        columnList.add("users");
+        map.put("columns", columnList);
+
+        List<UserStat> userStatList = userMapper.selectUserStat();
+        map.put("rows", userStatList);
+        return map;
     }
 }
