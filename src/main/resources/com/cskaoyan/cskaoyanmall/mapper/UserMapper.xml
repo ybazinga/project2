@@ -235,18 +235,7 @@
     </if>
   </select>
 
-<<<<<<< HEAD
-  <update id="updateByExampleSelective" parameterType="map">
-=======
-
-
-
-
-
-
-
     <update id="updateByExampleSelective" parameterType="map">
->>>>>>> 5f54b61231059c9d42234990bd8c5818e394c7e1
     update cskaoyanmall_user
     <set>
       <if test="record.id != null">
@@ -395,8 +384,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByid" resultType="com.cskaoyan.cskaoyanmall.bean.User">
+  <!--<select id="selectByid" resultType="com.cskaoyan.cskaoyanmall.bean.User">
    select <include refid="Base_Column_List"/> from cskaoyanmall_user where id=1
-  </select>
+  </select>-->
 </mapper>
 
