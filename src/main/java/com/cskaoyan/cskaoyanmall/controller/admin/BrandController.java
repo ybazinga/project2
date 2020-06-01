@@ -1,40 +1,38 @@
-package com.cskaoyan.cskaoyanmall.controller;
+package com.cskaoyan.cskaoyanmall.controller.admin;
 
-import com.cskaoyan.cskaoyanmall.bean.Ad;
 import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
 import com.cskaoyan.cskaoyanmall.bean.Brand;
 import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
-import com.cskaoyan.cskaoyanmall.service.AdService;
-import com.cskaoyan.cskaoyanmall.service.impl.AdServiceImpl;
+import com.cskaoyan.cskaoyanmall.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author viking chen
- * @date 2020/5/29 22:13
+ * @date 2020/5/29 12:22
  */
 @RestController
-@RequestMapping("admin/ad")
-public class AdController {
+@RequestMapping("admin/brand")
+public class BrandController {
 
     @Autowired
-    AdService adService;
+    BrandService brandService;
 
     /**
-     * 根据条件显示所有广告页面（包括搜索）
+     * 显示所有的品牌信息
      * @param pagingReqVo
      * @return
      */
     @RequestMapping("list")
-    public BaseRespVo adList(PagingReqVo pagingReqVo) {
+    public BaseRespVo brandList(PagingReqVo pagingReqVo) {
         BaseRespVo<Map<String,Object>> resp = new BaseRespVo<>();
         try {
-            resp.setData(adService.getAdListData(pagingReqVo));
+            resp.setData(brandService.getBrandListData(pagingReqVo));
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
@@ -46,69 +44,74 @@ public class AdController {
         return resp;
     }
 
-    /**
-     * 创建一个新的广告
-     * @param ad
-     * @return
-     */
-    @RequestMapping("create")
-    public BaseRespVo adCreate(@RequestBody Ad ad) {
-        BaseRespVo<Ad> resp = new BaseRespVo<>();
-        try {
-            resp.setData(adService.getAdCreateData(ad));
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.setErrno(502);
-            resp.setErrmsg("系统内部错误");
-            return resp;
-        }
-        resp.setErrno(0);
-        resp.setErrmsg("成功");
-        return resp;
-    }
 
     /**
-     * 更新一个广告的信息
-     * @param ad
+     * 更新某个品牌的信息
+     * @param brand
      * @return
      */
     @RequestMapping("update")
-    public BaseRespVo adUpdate(@RequestBody Ad ad) {
-        BaseRespVo<Ad> resp = new BaseRespVo<>();
-        Ad respAd = null;
+    public BaseRespVo brandUpdate(@RequestBody Brand brand) {
+        BaseRespVo<Brand> resp = new BaseRespVo<>();
+        Brand respBrand = null;
         try {
-            respAd = adService.getAdUpdateData(ad);
+            respBrand = brandService.updateBrand(brand);
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
             resp.setErrmsg("系统内部错误");
             return resp;
         }
-        resp.setData(respAd);
+        resp.setData(respBrand);
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
+
+
+    /**
+     * （逻辑）删除某个品牌的信息
+     * @param brand
+     * @return
+     */
+    @RequestMapping("delete")
+    public BaseRespVo brandDelete(@RequestBody Brand brand) {
+        BaseRespVo resp = new BaseRespVo<>();
+        try {
+            brandService.deleteBrandById(brand.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;
     }
 
     /**
-     * 逻辑删除某个广告
-     * @param ad
+     * 创建某个品牌的信息
+     * @param brand
      * @return
      */
-    @RequestMapping("delete")
-    public BaseRespVo adDelete(@RequestBody Ad ad) {
+    @RequestMapping("create")
+    public BaseRespVo brandCreate(@RequestBody Brand brand) {
         BaseRespVo resp = new BaseRespVo<>();
+        Brand respBrand = null;
         try {
-            adService.deleteAdById(ad.getId());
+            respBrand = brandService.createBrand(brand);
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
             resp.setErrmsg("系统内部错误");
             return resp;
         }
+        resp.setData(respBrand);
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;
     }
+
 
 }

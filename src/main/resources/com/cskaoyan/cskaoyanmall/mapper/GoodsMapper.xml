@@ -570,7 +570,14 @@ category_id FROM cskaoyanmall_goods WHERE goods_sn = #{id}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-
+  <select id="selectGoodsStat" resultType="com.cskaoyan.cskaoyanmall.bean.GoodsStat">
+select sum(price) as amount,
+    COUNT(id) as orders,
+		sum(number) as products,
+		DATE_FORMAT(add_time,'%Y-%m-%d') as `day`
+		from cskaoyanmall_order_goods
+		GROUP BY `day`
+  </select>
 
 
 </mapper>

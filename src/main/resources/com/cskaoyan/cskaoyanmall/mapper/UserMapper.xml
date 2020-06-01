@@ -383,6 +383,12 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectUserStat" resultType="com.cskaoyan.cskaoyanmall.bean.UserStat">
+    select count(id) as users,
+    DATE_FORMAT(add_time, '%Y-%m-%d') as `day`
+    from cskaoyanmall_user
+    group by `day`;
+  </select>
 
   <!--<select id="selectByid" resultType="com.cskaoyan.cskaoyanmall.bean.User">
    select <include refid="Base_Column_List"/> from cskaoyanmall_user where id=1
