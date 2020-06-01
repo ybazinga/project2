@@ -1,4 +1,4 @@
-package com.cskaoyan.cskaoyanmall.controller;
+package com.cskaoyan.cskaoyanmall.controller.admin;
 
 import com.cskaoyan.cskaoyanmall.bean.*;
 import com.cskaoyan.cskaoyanmall.service.UserService;

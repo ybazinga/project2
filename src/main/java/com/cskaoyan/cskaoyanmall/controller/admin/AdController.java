@@ -1,8 +1,13 @@
-package com.cskaoyan.cskaoyanmall.controller;
+package com.cskaoyan.cskaoyanmall.controller.admin;
 
-import com.cskaoyan.cskaoyanmall.bean.*;
-import com.cskaoyan.cskaoyanmall.service.AdminService;
+import com.cskaoyan.cskaoyanmall.bean.Ad;
+import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
+import com.cskaoyan.cskaoyanmall.bean.Brand;
+import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
+import com.cskaoyan.cskaoyanmall.service.AdService;
+import com.cskaoyan.cskaoyanmall.service.impl.AdServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,24 +16,25 @@ import java.util.Map;
 
 /**
  * @author viking chen
- * @date 2020/5/30 22:26
+ * @date 2020/5/29 22:13
  */
 @RestController
-@RequestMapping("admin/admin")
-public class AdminController {
+@RequestMapping("admin/ad")
+public class AdController {
+
     @Autowired
-    AdminService adminService;
+    AdService adService;
 
     /**
-     * 根据条件显示所有管理员（包括搜索）
+     * 根据条件显示所有广告页面（包括搜索）
      * @param pagingReqVo
      * @return
      */
     @RequestMapping("list")
-    public BaseRespVo admindList(AdminPagingReqVo pagingReqVo) {
+    public BaseRespVo adList(PagingReqVo pagingReqVo) {
         BaseRespVo<Map<String,Object>> resp = new BaseRespVo<>();
         try {
-            resp.setData(adminService.getAdminListData(pagingReqVo));
+            resp.setData(adService.getAdListData(pagingReqVo));
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
@@ -41,15 +47,15 @@ public class AdminController {
     }
 
     /**
-     * 创建一个新的管理员
-     * @param admin
+     * 创建一个新的广告
+     * @param ad
      * @return
      */
     @RequestMapping("create")
-    public BaseRespVo adminCreate(@RequestBody Admin admin) {
-        BaseRespVo<Admin> resp = new BaseRespVo<>();
+    public BaseRespVo adCreate(@RequestBody Ad ad) {
+        BaseRespVo<Ad> resp = new BaseRespVo<>();
         try {
-            resp.setData(adminService.getAdCreateData(admin));
+            resp.setData(adService.getAdCreateData(ad));
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
@@ -62,38 +68,38 @@ public class AdminController {
     }
 
     /**
-     * 更新一个管理员的信息
-     * @param admin
+     * 更新一个广告的信息
+     * @param ad
      * @return
      */
     @RequestMapping("update")
-    public BaseRespVo adUpdate(@RequestBody Admin admin) {
-        BaseRespVo<Admin> resp = new BaseRespVo<>();
-        Admin respAdmin = null;
+    public BaseRespVo adUpdate(@RequestBody Ad ad) {
+        BaseRespVo<Ad> resp = new BaseRespVo<>();
+        Ad respAd = null;
         try {
-            respAdmin = adminService.getAdminUpdateData(admin);
+            respAd = adService.getAdUpdateData(ad);
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
             resp.setErrmsg("系统内部错误");
             return resp;
         }
-        resp.setData(respAdmin);
+        resp.setData(respAd);
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;
     }
 
     /**
-     * 逻辑删除某个管理员
-     * @param admin
+     * 逻辑删除某个广告
+     * @param ad
      * @return
      */
     @RequestMapping("delete")
-    public BaseRespVo adDelete(@RequestBody Admin admin) {
+    public BaseRespVo adDelete(@RequestBody Ad ad) {
         BaseRespVo resp = new BaseRespVo<>();
         try {
-            adminService.deleteAdById(admin.getId());
+            adService.deleteAdById(ad.getId());
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
@@ -104,4 +110,5 @@ public class AdminController {
         resp.setErrmsg("成功");
         return resp;
     }
+
 }

@@ -1,84 +1,34 @@
-package com.cskaoyan.cskaoyanmall.controller;
+package com.cskaoyan.cskaoyanmall.controller.admin;
 
-import com.cskaoyan.cskaoyanmall.bean.BaseRespVo;
-import com.cskaoyan.cskaoyanmall.bean.Brand;
-import com.cskaoyan.cskaoyanmall.bean.PagingReqVo;
-import com.cskaoyan.cskaoyanmall.service.BrandService;
+import com.cskaoyan.cskaoyanmall.bean.*;
+import com.cskaoyan.cskaoyanmall.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author viking chen
- * @date 2020/5/29 12:22
+ * @date 2020/5/30 22:26
  */
 @RestController
-@RequestMapping("admin/brand")
-public class BrandController {
-
+@RequestMapping("admin/admin")
+public class AdminController {
     @Autowired
-    BrandService brandService;
+    AdminService adminService;
 
     /**
-     * 显示所有的品牌信息
+     * 根据条件显示所有管理员（包括搜索）
      * @param pagingReqVo
      * @return
      */
     @RequestMapping("list")
-    public BaseRespVo brandList(PagingReqVo pagingReqVo) {
+    public BaseRespVo admindList(AdminPagingReqVo pagingReqVo) {
         BaseRespVo<Map<String,Object>> resp = new BaseRespVo<>();
         try {
-            resp.setData(brandService.getBrandListData(pagingReqVo));
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.setErrno(502);
-            resp.setErrmsg("系统内部错误");
-            return resp;
-        }
-        resp.setErrno(0);
-        resp.setErrmsg("成功");
-        return resp;
-    }
-
-
-    /**
-     * 更新某个品牌的信息
-     * @param brand
-     * @return
-     */
-    @RequestMapping("update")
-    public BaseRespVo brandUpdate(@RequestBody Brand brand) {
-        BaseRespVo<Brand> resp = new BaseRespVo<>();
-        Brand respBrand = null;
-        try {
-            respBrand = brandService.updateBrand(brand);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.setErrno(502);
-            resp.setErrmsg("系统内部错误");
-            return resp;
-        }
-        resp.setData(respBrand);
-        resp.setErrno(0);
-        resp.setErrmsg("成功");
-        return resp;
-    }
-
-
-    /**
-     * （逻辑）删除某个品牌的信息
-     * @param brand
-     * @return
-     */
-    @RequestMapping("delete")
-    public BaseRespVo brandDelete(@RequestBody Brand brand) {
-        BaseRespVo resp = new BaseRespVo<>();
-        try {
-            brandService.deleteBrandById(brand.getId());
+            resp.setData(adminService.getAdminListData(pagingReqVo));
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
@@ -91,27 +41,67 @@ public class BrandController {
     }
 
     /**
-     * 创建某个品牌的信息
-     * @param brand
+     * 创建一个新的管理员
+     * @param admin
      * @return
      */
     @RequestMapping("create")
-    public BaseRespVo brandCreate(@RequestBody Brand brand) {
-        BaseRespVo resp = new BaseRespVo<>();
-        Brand respBrand = null;
+    public BaseRespVo adminCreate(@RequestBody Admin admin) {
+        BaseRespVo<Admin> resp = new BaseRespVo<>();
         try {
-            respBrand = brandService.createBrand(brand);
+            resp.setData(adminService.getAdCreateData(admin));
         } catch (Exception e) {
             e.printStackTrace();
             resp.setErrno(502);
             resp.setErrmsg("系统内部错误");
             return resp;
         }
-        resp.setData(respBrand);
         resp.setErrno(0);
         resp.setErrmsg("成功");
         return resp;
     }
 
+    /**
+     * 更新一个管理员的信息
+     * @param admin
+     * @return
+     */
+    @RequestMapping("update")
+    public BaseRespVo adUpdate(@RequestBody Admin admin) {
+        BaseRespVo<Admin> resp = new BaseRespVo<>();
+        Admin respAdmin = null;
+        try {
+            respAdmin = adminService.getAdminUpdateData(admin);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setData(respAdmin);
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
 
+    /**
+     * 逻辑删除某个管理员
+     * @param admin
+     * @return
+     */
+    @RequestMapping("delete")
+    public BaseRespVo adDelete(@RequestBody Admin admin) {
+        BaseRespVo resp = new BaseRespVo<>();
+        try {
+            adminService.deleteAdById(admin.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setErrno(502);
+            resp.setErrmsg("系统内部错误");
+            return resp;
+        }
+        resp.setErrno(0);
+        resp.setErrmsg("成功");
+        return resp;
+    }
 }
