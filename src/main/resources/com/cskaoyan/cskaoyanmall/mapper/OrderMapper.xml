@@ -315,13 +315,13 @@
         </if>
     </select>
     <select id="selectOrderStat" resultType="com.cskaoyan.cskaoyanmall.bean.OrderStat">
-      select sum(actual_price) as amount,
+      select sum(order_price) as amount,
         COUNT(id) as orders,
         COUNT(DISTINCT user_id) as customers,
         DATE_FORMAT(add_time,'%Y-%m-%d') as `day`,
-        sum(actual_price) / COUNT(DISTINCT user_id) as pcr
+        sum(order_price) / COUNT(DISTINCT user_id) as pcr
         from cskaoyanmall_order
-        GROUP BY 'day'
+        GROUP BY `day`
     </select>
     <update id="updateByExampleSelective" parameterType="map">
         update cskaoyanmall_order
